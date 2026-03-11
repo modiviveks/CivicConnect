@@ -3,6 +3,7 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const connectDB = require('./utils/db');
 const authRoutes = require('./routes/auth.routes');
+const issueRoutes = require('./routes/issue.routes');
 
 dotenv.config();
 connectDB();
@@ -13,6 +14,7 @@ app.use(express.json());
 
 // Routes
 app.use('/api/auth', authRoutes);
+app.use('/api/issues', issueRoutes);
 
 // Health check
 app.get('/', (req, res) => {

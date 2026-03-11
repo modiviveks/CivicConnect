@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vivek -developer portfolio</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background-color: rgb(7, 7, 49);
+        color: white;
+        font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+          "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+      }
+
+      nav {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        height: 80px;
+        background-color: rgb(29, 29, 103);
+      }
+      nav ul {
+        display: flex;
+        justify-content: center;
+      }
+
+      nav ul li {
+        list-style: none;
+        margin: 0 23px;
+      }
+
+      nav ul li a {
+        text-decoration: none;
+        color: white;
+      }
+      nav ul li a:hover {
+        color: rgb(70, 70, 82);
+        font-size: 1.04rem;
+      }
+
+      .left {
+        font-size: 1.5rem;
+      }
+
+      .firstsection {
+        display: flex;
+        justify-content: space-around;
+        margin: 80px 0;
+        align-items: center;
+      }
+      .leftsection {
+        margin: 30px 0;
+        font-size: 1.5rem;
+      }
+      .purple {
+        color: blueviolet;
+      }
+      .firstsection div {
+        width: 35%;
+      }
+      .rightsection img {
+        width: 80%;
+      }
+      #element {
+        color: blueviolet;
+      }
+
+      .secondsection {
+        max-width: 80vw;
+        margin: auto;
+        height: 80vh;
+      }
+      main hr {
+        border: 0;
+        background: blue;
+        height: 1.3px;
+        margin: 30px 30px;
+      }
+      .secondsection h1 {
+        font-size: 1.5rem;
+      }
+
+      .secondsection .box {
+        background: white;
+        width:80vw;
+        height:2px;
+        margin:56px 0;
+        display:flex;
+      }
+      .text-gray {
+        color: gray;
+      }
+
+      .secondsection .vertical {
+        height: 93px;
+        width: 1px;
+        background-color: white;
+        margin:0px 100px;
+      }
+
+      .verticaltitle{
+        position:relative;
+        top:-32px;
+       
+        width:23px;
+      }
+      .verticaldesc{
+background-color: blueviolet;
+      }
+
+      footer{
+        background-color: purple;
+        height:233px ;
+      }
+      .footer{
+        display: flex;
+        margin:23px 122px;
+      }
+      .footer>div{
+        width:23px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="left">Vivek's Portfolio</div>
+        <div class="right">
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/">About</a></li>
+            <li><a href="/">Services</a></li>
+            <li><a href="/">Projects</a></li>
+            <li><a href="/">Contact me</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <section>
+        <section class="firstsection">
+          <div class="leftsection">
+            Hi,My name is <span class="purple">Vivek</span>
+            <div>and I am a passionate</div>
+            <div>Web Developer</div>
+            <span id="element"></span>
+          </div>
+
+          <div class="rightsection">
+            <img src="bg.png" alt="not avaiable " />
+          </div>
+        </section>
+      </section>
+      <hr />
+      <section class="secondsection">
+        <span class="text-gray">What I have done so far</span>
+        <h1>Work Experience</h1>
+        <div class="box">
+          <div class="vertical">
+            <img src="" alt="" class="image-top">
+            <div class="verticaltitle">
+              HTML Developer 
+            </div>
+            <div class="verticaldesc">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores, iusto.
+            </div>
+          </div>
+            <div class="vertical"></div>
+            <div class="vertical"></div>
+            <div class="vertical"></div>
+         
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="flex">
+        <div class="footer-first">
+          <h3>Vivek's Developer Portfolio</h3>
+        </div>
+        <div class="footer-second">
+         <ul>
+          <li>Home</li>
+          <li>About</li>
+          <li>Services</li>
+          <li>Contact</li>
+           </ul>
+        </div>
+        <div class="footer-third">
+            <ul>
+          <li>Home</li>
+          <li>About</li>
+          <li>Services</li>
+          <li>Contact</li>
+           </ul>
+        </div>
+        <div class="footer-fourth">
+            <ul>
+          <li>Home</li>
+          <li>About</li>
+          <li>Services</li>
+          <li>Contact</li>
+           </ul>
+        </div>
+        </div>
+      </div>
+      <div class="text-center">
+        www.vivekportfolio.com| All  rights reserved
+      </div>
+    </footer>
+
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script>
+      var typed = new Typed("#element", {
+        strings: [
+          "Web Developer ",
+          "Graphic Designer ",
+          "Web Designer",
+          "Software Developer",
+        ],
+        typeSpeed: 50,
+      });
+    </script>
+  </body>
+</html>

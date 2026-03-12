@@ -106,16 +106,16 @@ const CityDashboard = () => {
 };
 
 const styles = {
-  container: { minHeight: '100vh', backgroundColor: '#f0f4f8' },
-  header: { backgroundColor: '#1A56DB', padding: '1rem 2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' },
+  container: { minHeight: '100vh', width: '100%', backgroundColor: '#f0f4f8' },
+  header: { backgroundColor: '#1A56DB', padding: '1rem 2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', boxSizing: 'border-box' },
   logo: { color: 'white', margin: 0 },
   headerRight: { display: 'flex', alignItems: 'center', gap: '1rem' },
   userName: { color: 'white' },
   navBtn: { padding: '0.4rem 1rem', backgroundColor: 'transparent', color: 'white', border: '1px solid white', borderRadius: '6px', cursor: 'pointer' },
   logoutBtn: { padding: '0.4rem 1rem', backgroundColor: 'transparent', color: 'white', border: '1px solid white', borderRadius: '6px', cursor: 'pointer' },
-  content: { maxWidth: '800px', margin: '0 auto', padding: '2rem' },
+  content: { width: '100%', padding: '2rem', boxSizing: 'border-box' },
   pageTitle: { color: '#1E293B', marginBottom: '1.5rem' },
-  statsGrid: { display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem', marginBottom: '1.5rem' },
+  statsGrid: { display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1.5rem', marginBottom: '1.5rem' },
   statCard: { backgroundColor: 'white', padding: '1.5rem', borderRadius: '12px', textAlign: 'center', boxShadow: '0 2px 10px rgba(0,0,0,0.08)' },
   statNumber: { margin: 0, color: '#1E293B', fontSize: '2.5rem' },
   statLabel: { margin: '0.5rem 0 0 0', color: '#64748B', fontSize: '0.9rem' },

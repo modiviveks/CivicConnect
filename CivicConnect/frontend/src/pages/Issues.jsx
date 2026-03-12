@@ -42,6 +42,32 @@ const Issues = () => {
     }
   };
 
+  const handleUpvote = async (issueId) => {
+    try {
+      await axios.post(
+        `http://localhost:5000/api/issues/${issueId}/upvote`,
+        {},
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      fetchIssues();
+    } catch (error) {
+      console.error('Error upvoting:', error);
+    }
+  };
+
+  const handleStatusUpdate = async (issueId, status) => {
+    try {
+      await axios.patch(
+        `http://localhost:5000/api/issues/${issueId}/status`,
+        { status },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      fetchIssues();
+    } catch (error) {
+      console.error('Error updating status:', error);
+    }
+  };
+
   const statusColor = (status) => {
     if (status === 'open') return '#EF4444';
     if (status === 'in_progress') return '#F59E0B';
@@ -55,12 +81,13 @@ const Issues = () => {
       <div style={styles.header}>
         <h2 style={styles.logo}>🏛 CivicConnect</h2>
         <div style={styles.headerRight}>
+          <button style={styles.navBtn} onClick={() => navigate('/city-dashboard')}>📊 Dashboard</button>
           <span style={styles.userName}>👋 {user?.name}</span>
           <button style={styles.logoutBtn} onClick={() => { logout(); navigate('/login'); }}>Logout</button>
         </div>
       </div>
 
-      {/* Report Button */}
+      {/* Content */}
       <div style={styles.content}>
         <div style={styles.topBar}>
           <h3 style={styles.pageTitle}>Community Issues</h3>
@@ -118,11 +145,31 @@ const Issues = () => {
               <div style={styles.cardFooter}>
                 <span style={styles.meta}>📍 {issue.location.address}</span>
                 <span style={styles.meta}>👤 {issue.reporter?.name}</span>
-                <span style={styles.meta}>⬆️ {issue.upvotes.length}</span>
+                <button style={styles.upvoteBtn} onClick={() => handleUpvote(issue._id)}>
+                  ⬆️ {issue.upvotes.length}
+                </button>
                 <span style={{...styles.urgency, color: issue.urgency === 'high' ? '#EF4444' : issue.urgency === 'medium' ? '#F59E0B' : '#10B981'}}>
                   {issue.urgency.toUpperCase()}
                 </span>
               </div>
+              {/* Status Update for resolver/admin */}
+              {(user?.role === 'resolver' || user?.role === 'admin') && (
+                <div style={styles.statusUpdate}>
+                  <span style={styles.meta}>Update Status: </span>
+                  {['open', 'in_progress', 'resolved', 'closed'].map(s => (
+                    <button
+                      key={s}
+                      style={{
+                        ...styles.statusBtn,
+                        backgroundColor: issue.status === s ? statusColor(s) : '#E2E8F0',
+                        color: issue.status === s ? 'white' : '#64748B'
+                      }}
+                      onClick={() => handleStatusUpdate(issue._id, s)}>
+                      {s.replace('_', ' ')}
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
           ))
         )}
@@ -137,6 +184,7 @@ const styles = {
   logo: { color: 'white', margin: 0 },
   headerRight: { display: 'flex', alignItems: 'center', gap: '1rem' },
   userName: { color: 'white' },
+  navBtn: { padding: '0.4rem 1rem', backgroundColor: 'transparent', color: 'white', border: '1px solid white', borderRadius: '6px', cursor: 'pointer' },
   logoutBtn: { padding: '0.4rem 1rem', backgroundColor: 'transparent', color: 'white', border: '1px solid white', borderRadius: '6px', cursor: 'pointer' },
   content: { maxWidth: '800px', margin: '0 auto', padding: '2rem' },
   topBar: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' },
@@ -153,9 +201,12 @@ const styles = {
   status: { color: 'white', padding: '0.2rem 0.6rem', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 'bold' },
   issueTitle: { margin: '0.5rem 0', color: '#1E293B' },
   issueDesc: { color: '#64748B', margin: '0 0 1rem 0', fontSize: '0.9rem' },
-  cardFooter: { display: 'flex', gap: '1rem', flexWrap: 'wrap' },
+  cardFooter: { display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' },
   meta: { color: '#64748B', fontSize: '0.85rem' },
-  urgency: { fontSize: '0.85rem', fontWeight: 'bold' }
+  urgency: { fontSize: '0.85rem', fontWeight: 'bold' },
+  upvoteBtn: { background: 'none', border: '1px solid #E2E8F0', borderRadius: '6px', padding: '0.2rem 0.6rem', cursor: 'pointer', color: '#64748B', fontSize: '0.85rem' },
+  statusUpdate: { marginTop: '1rem', paddingTop: '1rem', borderTop: '1px solid #E2E8F0', display: 'flex', gap: '0.5rem', alignItems: 'center', flexWrap: 'wrap' },
+  statusBtn: { padding: '0.2rem 0.6rem', border: 'none', borderRadius: '4px', cursor: 'pointer', fontSize: '0.75rem' }
 };
 
 export default Issues;

@@ -4,6 +4,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import Issues from './pages/Issues';
+import CityDashboard from './pages/CityDashboard';
 
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useAuth();
@@ -19,16 +20,9 @@ const App = () => {
           <Route path="/" element={<Navigate to="/issues" />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/dashboard" element={
-            <ProtectedRoute>
-              <Dashboard />
-            </ProtectedRoute>
-          } />
-          <Route path="/issues" element={
-            <ProtectedRoute>
-              <Issues />
-            </ProtectedRoute>
-          } />
+          <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+          <Route path="/issues" element={<ProtectedRoute><Issues /></ProtectedRoute>} />
+          <Route path="/city-dashboard" element={<ProtectedRoute><CityDashboard /></ProtectedRoute>} />
         </Routes>
       </AuthProvider>
     </BrowserRouter>

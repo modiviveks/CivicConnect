@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: 'http://localhost:5000/api'
+  baseURL: 'https://civicconnect-zwha.onrender.com/api'
 });
 
 export const registerUser = async (data) => {

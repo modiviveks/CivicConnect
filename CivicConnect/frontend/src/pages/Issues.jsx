@@ -3,6 +3,8 @@ import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
+const API_URL = 'https://civicconnect-zwha.onrender.com';
+
 const Issues = () => {
   const { user, token, logout } = useAuth();
   const navigate = useNavigate();
@@ -19,7 +21,7 @@ const Issues = () => {
 
   const fetchIssues = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/issues');
+      const res = await axios.get(`${API_URL}/api/issues`);
       setIssues(res.data.issues);
     } catch (error) {
       console.error('Error fetching issues:', error);
@@ -31,7 +33,7 @@ const Issues = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/issues', formData, {
+      await axios.post(`${API_URL}/api/issues`, formData, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setShowForm(false);
@@ -45,7 +47,7 @@ const Issues = () => {
   const handleUpvote = async (issueId) => {
     try {
       await axios.post(
-        `http://localhost:5000/api/issues/${issueId}/upvote`,
+        `${API_URL}/api/issues/${issueId}/upvote`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -58,7 +60,7 @@ const Issues = () => {
   const handleStatusUpdate = async (issueId, status) => {
     try {
       await axios.patch(
-        `http://localhost:5000/api/issues/${issueId}/status`,
+        `${API_URL}/api/issues/${issueId}/status`,
         { status },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -77,7 +79,6 @@ const Issues = () => {
 
   return (
     <div style={styles.container}>
-      {/* Header */}
       <div style={styles.header}>
         <h2 style={styles.logo}>🏛 CivicConnect</h2>
         <div style={styles.headerRight}>
@@ -87,7 +88,6 @@ const Issues = () => {
         </div>
       </div>
 
-      {/* Content */}
       <div style={styles.content}>
         <div style={styles.topBar}>
           <h3 style={styles.pageTitle}>Community Issues</h3>
@@ -96,7 +96,6 @@ const Issues = () => {
           </button>
         </div>
 
-        {/* Report Form */}
         {showForm && (
           <div style={styles.form}>
             <h4 style={styles.formTitle}>Report a New Issue</h4>
@@ -126,7 +125,6 @@ const Issues = () => {
           </div>
         )}
 
-        {/* Issues List */}
         {loading ? (
           <p style={styles.loading}>Loading issues...</p>
         ) : issues.length === 0 ? (
@@ -152,13 +150,11 @@ const Issues = () => {
                   {issue.urgency.toUpperCase()}
                 </span>
               </div>
-              {/* Status Update for resolver/admin */}
               {(user?.role === 'resolver' || user?.role === 'admin') && (
                 <div style={styles.statusUpdate}>
                   <span style={styles.meta}>Update Status: </span>
                   {['open', 'in_progress', 'resolved', 'closed'].map(s => (
-                    <button
-                      key={s}
+                    <button key={s}
                       style={{
                         ...styles.statusBtn,
                         backgroundColor: issue.status === s ? statusColor(s) : '#E2E8F0',
